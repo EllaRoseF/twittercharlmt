@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f8fa;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 70px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #1da1f2;
+  margin-top: 0;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+#numleft {
+  font-weight: bold;
+  color: #1da1f2;
+}
+
+#showcomment {
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: vertical;
+  height: 120px;
+}
+
+input[type="submit"] {
+  background-color: #1da1f2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type="submit"]:hover {
+  background-color: #0c87c7;
+}
+
+.err {
+  color: red;
+}
+
+</style>
+<script>
+function showComment() {
+  var comment = document.getElementById("comments").value;
+  var remainingChars = 255 - comment.length;
+  
+  if (remainingChars < 0) {
+    document.getElementById("comments").value = comment.slice(0, 255);
+    remainingChars = 0;
+  }
+  
+  document.getElementById("numleft").innerHTML = remainingChars;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("comments").addEventListener("input", showComment);
+});
+</script>
+</head>
+<body>
+<div class="container">
+  <h1>Compose a Tweet</h1>
+  <form action="" method="post">
+    <input type="text" name="fullname" id="fullname" placeholder="Full Name">
+    <span class="err"></span><br>
+    <div id="showcomment">You have <span id="numleft">255</span> characters left!</div>
+    <textarea id="comments" maxlength="255" placeholder="What's happening?"></textarea>
+    <input type="submit" name="submit" value="Tweet">
+  </form>
+</div>
+</body>
+</html>
